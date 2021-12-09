@@ -5,7 +5,7 @@ import os
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from Telegram.main import createBot
+from Telegram.bot import createBot
 
 
 if __name__ == "__main__":
@@ -13,7 +13,8 @@ if __name__ == "__main__":
     app = Flask(__name__)
     bot = createBot()
 
-    PUBLIC_URL = "https://9d8e9893f256.ngrok.io/"
+    # PUBLIC_URL = "https://yxian-budget-test.herokuapp.com/" # https://git.heroku.com/yxian-budget-test.git
+    PUBLIC_URL = "https://fa66-42-61-160-251.ngrok.io/"
     weburl = PUBLIC_URL + bot.token
 
     print(weburl)
@@ -63,4 +64,4 @@ if __name__ == "__main__":
             return "Webhook not set...Try again..."
 
     start()
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5005)))
