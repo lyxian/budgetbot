@@ -67,13 +67,6 @@ def createBot():
                 text = f"You have entered ${number} for {call.data.split()[1]} @ {call.data.split()[0]}\nEnter description: "
                 bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
                 bot.send_message(call.message.chat.id, text, reply_markup=ForceReply(selective=False))
-                
-                # bot.edit_message_text(
-                #     text=f"You have entered ${number} for {call.data.split()[1]} @ {call.data.split()[0]}\nEnter description: ",
-                #     chat_id=call.message.chat.id,
-                #     message_id=call.message.message_id,
-                #     reply_markup=None
-                # )
             elif 'DEL' in call.data:
                 call.data = call.data.split("DEL ")[1][:-1].strip('.')
                 number = call.data.split()[2] if call.data[-1] != ' ' else ''

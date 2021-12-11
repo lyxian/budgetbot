@@ -21,6 +21,7 @@ PyTelegramBotAPI
   - possible input :
     - .
   - implement with marshmallow
+  - how to edit/delete records
 - manage bot commands
   - subscription
   - add budget
