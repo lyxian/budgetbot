@@ -106,6 +106,10 @@ def createBot():
         bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
         bot.send_message(message.chat.id, "Choose Date", reply_markup=createMarkupCalendar())
 
+    # @bot.message_handler(func=lambda msg: msg)
+    # def message_handler(message):
+    #     pass
+    
     @bot.message_handler(func=lambda message: 'reply_to_message' in vars(message).keys() and message.reply_to_message.json['from']['is_bot'] and "description" in message.reply_to_message.text)
     def message_handler(message):
         pattern = r'.*\$(\d+\.*\d*).* (.*) @ (.*)\n.*:(.*)'
@@ -114,12 +118,23 @@ def createBot():
         # Edit/Delete Message
         bot.delete_message(chat_id=message.chat.id, message_id=message.reply_to_message.message_id)
         bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
+        pushToDb(message, data)
         bot.send_message(
             text=TEXT_DONE.format(current),
             chat_id=message.chat.id
         )
-        # Push Data
-        pushToDb(message, data)
+        # try:
+        #     # Push Data
+        #     pushToDb(message, data)
+        #     bot.send_message(
+        #         text=TEXT_DONE.format(current),
+        #         chat_id=message.chat.id
+        #     )
+        # except Exception as e:
+        #     bot.send_message(
+        #         text=f"Data not pushed due to ({e})",
+        #         chat_id=message.chat.id
+        #     )
 
     return bot
 

@@ -31,16 +31,14 @@ def pushToDb(message, data):
     # Check if User in DB_USERS
     if not db_user.exists(uid):
         user_data = {
-            uid: {
-                'userName': message.chat.username,
-                'chatId': message.chat.id,
-                'totalCount': 0,
-                'netSpending': 0,
-                'createdAt': pendulum.now().format('YYYY-MM-DDTHH:mm:ssZZ')
-            }
+            'userName': message.chat.username,
+            'chatId': message.chat.id,
+            'totalCount': 0,
+            'netSpending': 0,
+            'createdAt': pendulum.now().format('YYYY-MM-DDTHH:mm:ssZZ')
         }
         # Add User if not exists
-        db_user.hset(name=uid, mapping=user_data['uid'])
+        db_user.hset(name=uid, mapping=user_data)
         logging.info(f'{uid} has been added to DB_USER')
     else:
         user_data = db_user.hgetall(uid)
@@ -49,21 +47,19 @@ def pushToDb(message, data):
     pid = eval(f"{user_data['totalCount']}+1")
     record_id = f'{uid}:{pid}'
     record_data = {
-        record_id: {
-            'pid': pid,
-            'uid': uid,
-            'time': pendulum.now().format('HH:mm:ss'),
-            **data_dict
-        }
+        'pid': pid,
+        'uid': uid,
+        'time': pendulum.now().format('HH:mm:ss'),
+        **data_dict
     }
     # Check if Record in DB_RECORDS
     if not db_record.exists(record_id):
         # Add Record
-        db_record.hset(name=record_id, mapping=record_data['record_id'])
+        db_record.hset(name=record_id, mapping=record_data)
         logging.info(f'{record_id} has been added to DB_RECORD')
         # Increment User "totalCount", "netSpending"
         db_user.hincrby(name=uid, key='totalCount', amount=1)
-        db_user.hincrby(name=uid, key='netSpending', amount=record_data['price'])
+        db_user.hincrbyfloat(name=uid, key='netSpending', amount=record_data['price'])
         logging.info(f'{uid} updated!')
     else:
         logging.info(f'{record_id} cannot be added to DB_RECORD')
