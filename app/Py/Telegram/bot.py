@@ -106,8 +106,8 @@ def createBot():
 
     @bot.message_handler(func=lambda message: 'reply_to_message' in vars(message).keys() and message.reply_to_message.json['from']['is_bot'] and "description" in message.reply_to_message.text)
     def message_handler(message):
-        pattern = r'.*\$(\d+).* (.*) @ (.*)\n.*:(.*)'
-        results = re.search(pattern, message.reply_to_message.text+message.text)
+        pattern = r'.*\$(\d+\.*\d*).* (.*) @ (.*)\n.*:(.*)'
+        data = re.search(pattern, message.reply_to_message.text+message.text)
         current = pendulum.now().to_datetime_string()
         # Edit/Delete Message
         bot.delete_message(chat_id=message.chat.id, message_id=message.reply_to_message.message_id)
@@ -119,6 +119,7 @@ def createBot():
         res = f'{";".join(results.groups())}'
 
         # PAYLOAD: 5;Food;12-8-2021;Oooo
+        # ..(message, PAYLOAD)
 
     return bot
 
