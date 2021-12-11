@@ -18,10 +18,11 @@ logging.getLogger().setLevel(logging.INFO)
 
 DB_USER_ID = 1
 DB_RECORD_ID = 2
+HOSTNAME = '18.141.199.104'
 
 def pushToDb(message, data):
-    db_user = redis.Redis(db=DB_USER_ID, decode_responses=True)
-    db_record = redis.Redis(db=DB_RECORD_ID, decode_responses=True)
+    db_user = redis.Redis(db=DB_USER_ID, decode_responses=True, host=HOSTNAME)
+    db_record = redis.Redis(db=DB_RECORD_ID, decode_responses=True, host=HOSTNAME)
 
     # PAYLOAD: 5;Food;12-8-2021;Oooo
     headers = ['price', 'category', 'date', 'description']
