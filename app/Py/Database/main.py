@@ -27,7 +27,7 @@ def pushToDb(message, data):
     headers = ['price', 'category', 'date', 'description']
     data_dict = dict(zip(headers, data))
 
-    uid = '{1}:{2}'.format(message.chat.username, message.chat.id)
+    uid = '{}:{}'.format(message.chat.username, message.chat.id)
     # Check if User in DB_USERS
     if not db_user.exists(uid):
         user_data = {
@@ -36,7 +36,7 @@ def pushToDb(message, data):
                 'chatId': message.chat.id,
                 'totalCount': 0,
                 'netSpending': 0,
-                'createdAt': pendulum.now.format('YYYY-MM-DDTHH:mm:ssZZ')
+                'createdAt': pendulum.now().format('YYYY-MM-DDTHH:mm:ssZZ')
             }
         }
         # Add User if not exists
