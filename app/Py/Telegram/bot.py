@@ -114,13 +114,12 @@ def createBot():
     def message_handler(message):
         pattern = r'.*\$(\d+\.*\d*).* (.*) @ (.*)\n.*:(.*)'
         data = re.search(pattern, message.reply_to_message.text+message.text).groups()
-        current = pendulum.now().to_datetime_string()
         # Edit/Delete Message
         bot.delete_message(chat_id=message.chat.id, message_id=message.reply_to_message.message_id)
         bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
         # pushToDb(message, data)
         bot.send_message(
-            text=TEXT_DONE.format(current),
+            text=TEXT_DONE.format(pendulum.now(tz='Asia/Singapore').to_datetime_string()),
             chat_id=message.chat.id
         )
         # try:

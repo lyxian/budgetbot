@@ -35,7 +35,7 @@ def pushToDb(message, data):
             'chatId': message.chat.id,
             'totalCount': 0,
             'netSpending': 0,
-            'createdAt': pendulum.now().format('YYYY-MM-DDTHH:mm:ssZZ')
+            'createdAt': pendulum.now(tz='Asia/Singapore').format('YYYY-MM-DDTHH:mm:ssZZ')
         }
         # Add User if not exists
         db_user.hset(name=uid, mapping=user_data)
@@ -49,7 +49,7 @@ def pushToDb(message, data):
     record_data = {
         'pid': pid,
         'uid': uid,
-        'time': pendulum.now().format('HH:mm:ss'),
+        'time': pendulum.now(tz='Asia/Singapore').format('HH:mm:ss'),
         **data_dict
     }
     # Check if Record in DB_RECORDS
