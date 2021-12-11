@@ -1,0 +1,1 @@
+web: python app/Py/Server/main.py
