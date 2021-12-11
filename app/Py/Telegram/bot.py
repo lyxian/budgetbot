@@ -1,13 +1,15 @@
 from cryptography.fernet import Fernet
 import telebot
 import json
+import sys
 import os
 import re
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 import pendulum
 import logging
 
-from markups import createMarkupCalendar, createMarkupCategory, createMarkupPrice, ForceReply, ReplyKeyboardRemove
+from markups import createMarkupCalendar, createMarkupCategory, createMarkupPrice, ForceReply
 from utils import TEXT_PRICE, TEXT_DONE
 
 def getToken():

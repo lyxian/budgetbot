@@ -1,4 +1,4 @@
-from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, ForceReply
 from utils import CalendarObject, WEEKDAYS, CATEGORIES
 import pendulum
 
@@ -73,8 +73,3 @@ def createMarkupPrice(digits=''):
         InlineKeyboardButton(text="Enter", callback_data=enter.format(digits))
     )
     return markup
-
-# selective (bool, optional) –
-# Use this parameter if you want to force reply from specific users only. Targets:
-# Users that are @mentioned in the text of the telegram.Message object.
-# If the bot’s message is a reply (has reply_to_message_id), sender of the original message.
