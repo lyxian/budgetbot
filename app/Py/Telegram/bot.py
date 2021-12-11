@@ -120,7 +120,6 @@ def createBot():
         )
         # Push Data
         pushToDb(message, data)
-        # ..(message, PAYLOAD)
 
     return bot
 
