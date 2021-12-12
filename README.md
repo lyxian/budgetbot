@@ -1,5 +1,64 @@
 # Budgets Bot
 
+## Changelogs
+
+**ToDo**
+
+- `simulate local DB commands`
+  - implement with marshmallow
+  - how to edit/delete records
+- `manage backend bot server`
+  - prod (gunicorn/waitress)
+  - setup ENV
+
+**Done**
+
+- `simulate local DB commands`
+  - structures :
+    - { user : id } , { date : { id , time , type , cost} }
+  - handle single dict (hset>mapping)
+- ` manage bot commands`
+  - subscription
+  - add budget
+  - manual :
+    - choose date
+      - calendar
+    - choose category
+    - input cost
+  - include DEBUG_MODE
+- `manage backend bot server`
+  - dev (flask)
+
+## Bot Configuration
+
+- bot command
+- get calendar
+  - undo/cancel
+  - selection
+- get category
+
+## Cloud Configuration
+
+- setup telebot on Heroku
+- setup Redis on AWS
+
+## Add-ons
+
+- read/edit/remove past records
+  - search by :
+    - YEAR > MONTH > DAY > views records in a day
+    - display up to \_ records with sidebar navigator
+- main menu GUI
+  - buttons :
+    - add
+    - analyze spending within time period
+    - edit past records
+- try docker-compose
+  - flask--telebot
+  - redis--container
+
+## Packages
+
 ##Packages
 Flask
 Redis
@@ -9,38 +68,3 @@ marshmallow
 cryptography
 PyTelegramBotAPI
 ##Packages
-
-## TO-DO
-
-- simulate local DB commands
-  - structures :
-    - { user : { date : { time , type , cost } } }
-    - { user : id } , { date : { id , time , type , cost} }
-  - handle single dict (hset>mapping)
-  - handle nested dict (not allowed)
-  - possible input :
-    - .
-  - implement with marshmallow
-  - how to edit/delete records
-- manage bot commands
-  - subscription
-  - add budget
-  - manual :
-    - choose date (HARD)
-      - calendar
-    - choose category
-    - input cost
-- manage backend bot server
-  - dev
-    - flask
-  - prod
-    - gunicorn
-    - waitress
-
-## Bot Configuration
-
-- bot command
-- get calendar
-  - undo/cancel
-  - selection
-- get category

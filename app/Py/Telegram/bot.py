@@ -118,23 +118,25 @@ def createBot():
         # Edit/Delete Message
         bot.delete_message(chat_id=message.chat.id, message_id=message.reply_to_message.message_id)
         bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
-        pushToDb(message, data)
-        bot.send_message(
-            text=TEXT_DONE.format(current),
-            chat_id=message.chat.id
-        )
-        # try:
-        #     # Push Data
-        #     pushToDb(message, data)
-        #     bot.send_message(
-        #         text=TEXT_DONE.format(current),
-        #         chat_id=message.chat.id
-        #     )
-        # except Exception as e:
-        #     bot.send_message(
-        #         text=f"Data not pushed due to ({e})",
-        #         chat_id=message.chat.id
-        #     )
+        if DEBUG_MODE:
+            pushToDb(message, data)
+            bot.send_message(
+                text=TEXT_DONE.format(current),
+                chat_id=message.chat.id
+            )
+        else:
+            try:
+                # Push Data
+                pushToDb(message, data)
+                bot.send_message(
+                    text=TEXT_DONE.format(current),
+                    chat_id=message.chat.id
+                )
+            except Exception as e:
+                bot.send_message(
+                    text=f"Data not pushed due to ({e})",
+                    chat_id=message.chat.id
+                )
 
     return bot
 
