@@ -13,7 +13,8 @@ if __name__ == "__main__":
     bot = createBot()
 
     # PUBLIC_URL = "https://yxian-budget-test.herokuapp.com/" # https://git.heroku.com/yxian-budget-test.git
-    PUBLIC_URL = "https://896c-42-61-160-251.ngrok.io/"
+    # PUBLIC_URL = "https://896c-42-61-160-251.ngrok.io/"
+    PUBLIC_URL = os.getenv("PUBLIC_URL")
     weburl = PUBLIC_URL + bot.token
 
     print(weburl)

@@ -2,7 +2,7 @@
 
 ## Changelogs
 
-**ToDo**
+**To-Do**
 
 - `simulate local DB commands`
   - implement with marshmallow
@@ -28,6 +28,16 @@
   - include DEBUG_MODE
 - `manage backend bot server`
   - dev (flask)
+
+## Bugs
+
+**To-Do**
+
+- handle _unwanted_ plain message
+
+**Done**
+
+- .
 
 ## Bot Configuration
 
