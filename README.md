@@ -4,12 +4,21 @@
 
 **To-Do**
 
-- `simulate local DB commands`
+- `simulate local DB commands` (\*\*)
   - implement with marshmallow
   - how to edit/delete records
-- `manage backend bot server`
+- `manage backend bot server` (\*)
   - prod (gunicorn/waitress)
   - setup ENV
+- `cloud caching with local DB` (\*\*\*)
+  - setup local DB
+    - 1. Redis
+    - 2. MySQL
+    - 3. MongoDB
+  - setup data transfer
+    - caching services
+    - upload to local DB
+  - prepare docker-compose
 
 **Done**
 
