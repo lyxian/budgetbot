@@ -2,10 +2,6 @@
 
 if [ -f secrets ]; then
 
-mkdir test 
-cp secrets test/
-cd test 
-
 if [ ! -f .config ]; then
 mkdir .config
 fi
