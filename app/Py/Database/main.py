@@ -64,5 +64,17 @@ def pushToDb(message, data, current):
     else:
         logging.info(f'{record_id} cannot be added to DB_RECORD')
 
+def pullDb():
+    db_user = redis.Redis(host='redis', port=6379, db=DB_USER_ID, decode_responses=True)
+    db_record = redis.Redis(host='redis', port=6379, db=DB_RECORD_ID, decode_responses=True)
+
+    data = {}
+    # Download users
+    for user in db_user.keys():
+        data[user] = {
+            record_id: db_record.hgetall(record_id) for record_id in db_record.keys(f'{user}*')
+        }
+    return data
+
 if __name__ == '__main__':
     pass

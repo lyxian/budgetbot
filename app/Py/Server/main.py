@@ -5,7 +5,9 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from Telegram.bot import createBot
+from Database.main import pullDb
 PORT = 5005
+PASSWORD = 'lyx'
 
 if __name__ == "__main__":
 
@@ -52,6 +54,22 @@ if __name__ == "__main__":
         elif request.method == "POST":
             print("Wating...")
             return "!", 200
+
+    @app.route("/download", methods=["POST"])
+    def getData():
+        if request.method == 'POST':
+            if 'password' not in request.json.keys():
+                return 'No password found in POST data', '404'
+            else:
+                password = request.json['password']
+                if password != PASSWORD:
+                    return 'Password is incorrect', '403'
+                else:
+                    # Perform Download
+                    response = pullDb()
+                    return response, '200'
+        else:
+            return f'Unable to parse request method ({request.method})', '404'
 
     def start():
         bot.remove_webhook()
