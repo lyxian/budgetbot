@@ -18,9 +18,12 @@
   - setup data transfer
     - caching services
     - upload to local DB
-  - prepare docker-compose
+  - prepare docker-compose (CANNOT without valid SSL)
+    - 1. AWS-redis, Heroku-telebot
+    - 2. try nginx + cloud
 - `templating`
   - cloud=prod, local=dev > how to go cloud
+  - cloud=heroku
 
 **Done**
 
@@ -103,3 +106,6 @@ _Notes_
 - DEV : mount .py files
 - PROD : COPY static
 - edit `secrets` with APP_NAME=VALUE/API_KEY
+- SETUP :
+  - apt install docker-compose
+  - modify docker-compose to `3.3` or relevant
