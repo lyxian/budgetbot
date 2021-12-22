@@ -102,3 +102,4 @@ _Notes_
 
 - DEV : mount .py files
 - PROD : COPY static
+- edit `secrets` with APP_NAME=VALUE/API_KEY
