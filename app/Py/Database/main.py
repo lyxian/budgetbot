@@ -19,9 +19,9 @@ logging.getLogger().setLevel(logging.INFO)
 DB_USER_ID = 1
 DB_RECORD_ID = 2
 
-def pushToDb(message, data):
-    db_user = redis.Redis(db=DB_USER_ID, decode_responses=True)
-    db_record = redis.Redis(db=DB_RECORD_ID, decode_responses=True)
+def pushToDb(message, data, current):
+    db_user = redis.Redis(host='redis', port=6379, db=DB_USER_ID, decode_responses=True)
+    db_record = redis.Redis(host='redis', port=6379, db=DB_RECORD_ID, decode_responses=True)
 
     # PAYLOAD: 5;Food;12-8-2021;Oooo
     headers = ['price', 'category', 'date', 'description']
@@ -35,7 +35,7 @@ def pushToDb(message, data):
             'chatId': message.chat.id,
             'totalCount': 0,
             'netSpending': 0,
-            'createdAt': pendulum.now().format('YYYY-MM-DDTHH:mm:ssZZ')
+            'createdAt': current.format('YYYY-MM-DDTHH:mm:ssZZ')
         }
         # Add User if not exists
         db_user.hset(name=uid, mapping=user_data)
@@ -49,7 +49,7 @@ def pushToDb(message, data):
     record_data = {
         'pid': pid,
         'uid': uid,
-        'time': pendulum.now().format('HH:mm:ss'),
+        'time': current.format('HH:mm:ss'),
         **data_dict
     }
     # Check if Record in DB_RECORDS

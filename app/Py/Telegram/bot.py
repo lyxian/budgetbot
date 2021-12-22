@@ -14,7 +14,7 @@ from Database.main import pushToDb
 from markups import createMarkupCalendar, createMarkupCategory, createMarkupPrice, ForceReply
 from utils import TEXT_PRICE, TEXT_DONE
 
-DEBUG_MODE = eval(os.get.getenv("DEBUG_MODE"))
+DEBUG_MODE = eval(os.getenv("DEBUG_MODE"))
 
 def getToken():
     key = bytes(os.getenv("KEY"), "utf-8")
@@ -107,22 +107,22 @@ def createBot():
     def message_handler(message):
         pattern = r'.*\$(\d+\.*\d*).* (.*) @ (.*)\n.*:(.*)'
         data = re.search(pattern, message.reply_to_message.text+message.text).groups()
-        current = pendulum.now().to_datetime_string()
+        current = pendulum.now(tz='Asia/Singapore')
         # Edit/Delete Message
         bot.delete_message(chat_id=message.chat.id, message_id=message.reply_to_message.message_id)
         bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
         if DEBUG_MODE:
-            pushToDb(message, data)
+            pushToDb(message, data, current)
             bot.send_message(
-                text=TEXT_DONE.format(current),
+                text=TEXT_DONE.format(current.to_datetime_string()),
                 chat_id=message.chat.id
             )
         else:
             try:
                 # Push Data
-                pushToDb(message, data)
+                pushToDb(message, data, current)
                 bot.send_message(
-                    text=TEXT_DONE.format(current),
+                    text=TEXT_DONE.format(current.to_datetime_string()),
                     chat_id=message.chat.id
                 )
             except Exception as e:

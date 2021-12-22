@@ -11,7 +11,7 @@ else
 answer="False"
 fi
 
-echo -en "\nEnter PUBLIC_URL="
+echo -en "Enter PUBLIC_URL="
 read url
 
 # Create .env
@@ -27,7 +27,7 @@ done
 echo "ENV created in $appPath/.env"
 
 # Update "activate"
-if [ `cat .venv/bin/activate | grep "set +a"` ]; then 
+if [[ `cat .venv/bin/activate | grep "set +a"` ]]; then 
 echo "VENV already updated"
 else
 echo "

@@ -19,6 +19,8 @@
     - caching services
     - upload to local DB
   - prepare docker-compose
+- `templating`
+  - cloud=prod, local=dev > how to go cloud
 
 **Done**
 
@@ -87,3 +89,16 @@ marshmallow
 cryptography
 PyTelegramBotAPI
 ##Packages
+
+## Docker Commands
+
+- `cd app`
+  - `docker build -t budgetbot-test .`
+  - `docker run --rm -it --env-file .env -p 5005:5005 budgetbot-test <bash>`
+  - `docker run --rm -it --env-file .env -v /home/lyx/wSpace/Py/Projects/BudgetBot/app/Py:/app -p 5005:5005 budgetbot-test <bash>`
+- `docker-compose <-p project-name> <-f compose-filename> build/up`
+
+_Notes_
+
+- DEV : mount .py files
+- PROD : COPY static
