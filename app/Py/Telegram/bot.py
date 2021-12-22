@@ -14,7 +14,7 @@ from Database.main import pushToDb
 from markups import createMarkupCalendar, createMarkupCategory, createMarkupPrice, ForceReply
 from utils import TEXT_PRICE, TEXT_DONE
 
-DEBUG_MODE = eval(os.get.getenv("DEBUG_MODE"))
+DEBUG_MODE = eval(os.getenv("DEBUG_MODE"))
 
 def getToken():
     key = bytes(os.getenv("KEY"), "utf-8")
