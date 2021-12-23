@@ -14,3 +14,4 @@ services:
       - 6379:6379
     volumes:
       - /home/lyx/wSpace/Py/Projects/BudgetBot/redis:/data
+    command: redis-server --requirepass lyxi
