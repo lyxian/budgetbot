@@ -116,14 +116,14 @@ def createBot():
         bot.delete_message(chat_id=message.chat.id, message_id=message.reply_to_message.message_id)
         bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
         if DEBUG_MODE:
-            # import requests
-            # response = requests.get('https://a731-42-61-160-251.ngrok.io')
-            # print(vars(response))
-            pushToDb(message, data, current)
-            bot.send_message(
-                text=TEXT_DONE.format(current.to_datetime_string()),
-                chat_id=message.chat.id
-            )
+            import requests
+            response = requests.get('https://a731-42-61-160-251.ngrok.io')
+            print(vars(response))
+            # pushToDb(message, data, current)
+            # bot.send_message(
+            #     text=TEXT_DONE.format(current.to_datetime_string()),
+            #     chat_id=message.chat.id
+            # )
         else:
             try:
                 # Push Data
