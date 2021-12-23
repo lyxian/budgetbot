@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-BRANCH=`git rev-prase --abbrev-ref HEAD`
+BRANCH=`git rev-parse --abbrev-ref HEAD`
 MSG=$1
 
 if [ $# -eq 1 ]; then
