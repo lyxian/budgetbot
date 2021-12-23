@@ -8,15 +8,24 @@ exportFunc() {
     heroku config:set $ENV=$VALUE --app $APP
 }
 
-exportFunc .config/key yxian-budget-test
-exportFunc .config/secret_telegram yxian-budget-test
-
-exit
+# exportFunc .config/key yxian-budget-test
+# exportFunc .config/secret_telegram yxian-budget-test
+# exit
 
 API=`python3 -c "import json; file = open('.config/heroku.json'); data=json.loads(file.read()); print(data['api_key']); file.close()"`
 
 curlSettings="-H \"Accept: application/vnd.heroku+json; version=3\" -H \"Content-Type: application/json\""
 curlSettings="$curlSettings -H \"Authorization: Bearer ${API}\""
+
+eval "curl $curlSettings https://api.heroku.com/apps/yxian-budget-test/config-vars"
+
+# eval "curl $curlSettings -X POST https://api.heroku.com/apps/yxian-budget-test/config-vars \
+#   -d '{
+#   \"DEBUG_MODE\": \"True\",
+#   \"PUBLIC_URL\": \"https://yxian-budget-test.herokuapp.com/\"
+# }'"
+
+exit
 
 NAME="yxian-budget-test"
 # STACK="heroku/python"
