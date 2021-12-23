@@ -103,6 +103,10 @@ def createBot():
         bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
         bot.send_message(message.chat.id, "Choose Date", reply_markup=createMarkupCalendar())
 
+    # @bot.message_handler(func=lambda msg: msg)
+    # def message_handler(message):
+    #     pass
+    
     @bot.message_handler(func=lambda message: 'reply_to_message' in vars(message).keys() and message.reply_to_message.json['from']['is_bot'] and "description" in message.reply_to_message.text)
     def message_handler(message):
         pattern = r'.*\$(\d+\.*\d*).* (.*) @ (.*)\n.*:(.*)'
