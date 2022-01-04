@@ -83,7 +83,7 @@ def createBot():
                 elif call.data == 'IGNORE':
                     pass
             else:
-                if re.search(r'^\d{2}-\d{1,2}-\d{4} \w+ $', call.data):
+                if re.search(r'^\d{1,2}-\d{1,2}-\d{4} \w+ $', call.data):
                     bot.edit_message_text(
                         text=TEXT_PRICE.format(call.data.split()[1], call.data.split()[0]),
                         chat_id=call.message.chat.id,
@@ -99,12 +99,22 @@ def createBot():
                     )
 
     @bot.message_handler(commands=['start'])
-    def message_handler(message):
+    def message_handler_start(message):
+        bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
+        bot.send_message(message.chat.id, "Choose Date", reply_markup=createMarkupCalendar())
+
+    @bot.message_handler(commands=['view'])
+    def message_handler_view(message):
+        # Generate Markup
+        # Level 1 : today, up to 5 rows, description : price
+        # getRecords(..)
+        # genLevel1
+        # Level 2 : return pid, date, category, price, description
         bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
         bot.send_message(message.chat.id, "Choose Date", reply_markup=createMarkupCalendar())
 
     @bot.message_handler(func=lambda message: message.reply_to_message and message.reply_to_message.json['from']['is_bot'] and "description" in message.reply_to_message.text)
-    def message_handler(message):
+    def message_handler_parse_response(message):
         pattern = r'.*\$(\d+\.*\d*).* (.*) @ (.*)\n.*:(.*)'
         data = re.search(pattern, message.reply_to_message.text+message.text).groups()
         current = pendulum.now(tz='Asia/Singapore')

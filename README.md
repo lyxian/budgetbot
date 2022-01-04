@@ -19,11 +19,19 @@
     - caching services
     - upload to local DB
   - prepare docker-compose (CANNOT without valid SSL)
-    - 1. AWS-redis, Heroku-telebot
+    - 1. AWS-redis, Heroku-telebot (OK)
     - 2. try nginx + cloud
 - `templating`
   - cloud=prod, local=dev > how to go cloud
   - cloud=heroku
+- `improve UI`
+  - optimize querying by adding time (DDMMYYYY) to record_id
+  - new cmd to view by mth/day
+    - sort by day (eg. 5 rows) > select record > return date, category, price, description
+    - </> btns
+  - optimize workflow for users like back-btn
+  - UI
+    - pad words/texts
 
 **Done**
 
